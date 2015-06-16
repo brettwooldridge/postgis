@@ -35,6 +35,7 @@ public abstract class ValueGetter {
 
     /**
      * Get a byte, should be equal for all endians
+     * @return a byte
      */
     public byte getByte() {
         return (byte) data.get(position++);
@@ -63,6 +64,7 @@ public abstract class ValueGetter {
 
     /**
      * Get a double.
+     * @return a double
      */
     public double getDouble() {
         long bitrep = getLong();

@@ -53,7 +53,7 @@ public class BinaryWriter {
      * Get the appropriate ValueGetter for my endianness
      * 
      * @param bytes The appropriate Byte Getter
-     * 
+     * @param endian the endian'ness
      * @return the ValueGetter
      */
     public static ValueSetter valueSetterForEndian(ByteSetter bytes, byte endian) {
@@ -75,7 +75,10 @@ public class BinaryWriter {
      * 
      * The geometry you put in must be consistent, geom.checkConsistency() must
      * return true. If not, the result may be invalid WKB.
-     * 
+     *
+     * @param geom a Geometry
+     * @param REP endian'ness
+     * @return the hex string
      * @see Geometry#checkConsistency() the consistency checker
      */
     public synchronized String writeHexed(Geometry geom, byte REP) {
@@ -99,6 +102,9 @@ public class BinaryWriter {
      * The geometry you put in must be consistent, geom.checkConsistency() must
      * return true. If not, the result may be invalid WKB.
      * 
+     * @param geom a Geometry
+     * @param REP endian'ness
+     * @return the encoded bytes
      * @see Geometry#checkConsistency()
      */
     public synchronized byte[] writeBinary(Geometry geom, byte REP) {

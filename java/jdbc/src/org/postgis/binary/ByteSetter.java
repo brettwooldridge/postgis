@@ -27,7 +27,8 @@ public abstract class ByteSetter {
 
     /**
      * Set a byte.
-     * 
+     * @param b a byte
+     * @param index an index
      */
     public abstract void set(byte b, int index);
 

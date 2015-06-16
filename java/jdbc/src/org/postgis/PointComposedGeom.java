@@ -88,7 +88,10 @@ public abstract class PointComposedGeom extends ComposedGeom {
         }
     }
 
-    /** Get the underlying Point array */
+    /**
+     * Get the underlying Point array
+     * @return an array of Points
+     */
     public Point[] getPoints() {
         return (Point[]) subgeoms;
     }

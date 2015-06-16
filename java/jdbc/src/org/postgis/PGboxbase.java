@@ -55,12 +55,13 @@ public abstract class PGboxbase extends PGobject {
      * 
      * I use an abstract method here so we do not need to replicate the String
      * object in every instance.
-     * 
+     * @return the prefix 
      */
     public abstract String getPrefix();
 
     /**
      * The Postgres type we have (same construct as getPrefix())
+     * @return the PG type
      */
     public abstract String getPGtype();
 
@@ -123,12 +124,18 @@ public abstract class PGboxbase extends PGobject {
         return getValue();
     }
 
-    /** Returns the lower left bottom corner of the box as a Point object */
+    /**
+     * Returns the lower left bottom corner of the box as a Point object
+     * @return a Point
+     */
     public Point getLLB() {
         return llb;
     }
 
-    /** Returns the upper right top corner of the box as a Point object */
+    /**
+     * Returns the upper right top corner of the box as a Point object
+     * @return a Point
+     */
     public Point getURT() {
         return urt;
     }

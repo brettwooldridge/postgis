@@ -70,6 +70,8 @@ public class ShapeBinaryParser {
      * Is synchronized to protect offset counter. (Unfortunately, Java does not
      * have neither call by reference nor multiple return values.)
      * 
+     * @param value a hex string
+     * @param path a GeneralPath object
      * @return a potential SRID or Geometry.UNKNOWN_SRID if not present
      */
     public synchronized int parse(String value, GeneralPath path) {
@@ -83,6 +85,8 @@ public class ShapeBinaryParser {
      * Is synchronized to protect offset counter. (Unfortunately, Java does not
      * have neither call by reference nor multiple return values.)
      * 
+     * @param value a byte array
+     * @param path a GeneralPath object
      * @return a potential SRID or Geometry.UNKNOWN_SRID if not present
      */
     public synchronized int parse(byte[] value, GeneralPath path) {

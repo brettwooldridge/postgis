@@ -65,7 +65,7 @@ import org.postgresql.PGConnection;
  * works against PostGIS 1.x servers as well as 0.x (tested with 0.8, 0.9 and
  * 1.0).
  * 
- * @author Markus Schaber <markus.schaber@logix-tt.com>
+ * @author Markus Schaber &lt;markus.schaber@logix-tt.com&gt;
  * @see DriverWrapperLW
  * @see DriverWrapperAutoprobe
  */
@@ -87,7 +87,7 @@ public class DriverWrapper extends Driver {
      * 
      * This also loads the appropriate TypesAdder for our SQL Driver instance.
      * 
-     * @throws SQLException
+     * @throws SQLException thrown on error
      */
     public DriverWrapper() throws SQLException {
         super();
@@ -188,6 +188,7 @@ public class DriverWrapper extends Driver {
 
     /**
      * Returns our own CVS version plus postgres Version
+     * @return the version
      */
     public static String getVersion() {
         return "PostGisWrapper " + REVISION + ", wrapping " + Driver.getVersion();
@@ -205,7 +206,8 @@ public class DriverWrapper extends Driver {
      * to some class loader problems (but still work for now), and you may want
      * to use the method below instead.
      * 
-     * @throws SQLException
+     * @param pgconn a connection
+     * @throws SQLException thrown on error
      * 
      */
     public static void addGISTypes(PGConnection pgconn) throws SQLException {
@@ -214,6 +216,8 @@ public class DriverWrapper extends Driver {
 
     /**
      * adds the JTS/PostGIS Data types to a PG 8.0+ Connection.
+     * @param pgconn a connection
+     * @throws SQLException thrown on error
      */
     public static void addGISTypes80(PGConnection pgconn) throws SQLException {
         loadTypesAdder("80").addGT((Connection) pgconn, false);
@@ -222,7 +226,8 @@ public class DriverWrapper extends Driver {
     /**
      * adds the JTS/PostGIS Data types to a PG 7.2 Connection.
      * 
-     * @throws SQLException
+     * @param pgconn a connection
+     * @throws SQLException thrown on error
      */
     public static void addGISTypes72(org.postgresql.PGConnection pgconn) throws SQLException {
         loadTypesAdder("72").addGT((Connection) pgconn, false);

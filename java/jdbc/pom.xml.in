@@ -115,6 +115,8 @@
                 <version>2.9.1</version>
                 <configuration>
                     <overview>${basedir}/src/java/org/postgis/overview.html</overview>
+                    <excludePackageNames>example</excludePackageNames>
+                    <show>public</show>
                 </configuration>
                 <executions>
                     <execution>

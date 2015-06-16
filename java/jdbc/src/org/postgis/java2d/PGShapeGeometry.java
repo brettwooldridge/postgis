@@ -79,14 +79,22 @@ public class PGShapeGeometry extends PGobject implements Shape {
         path = new GeneralPath(GeneralPath.WIND_EVEN_ODD);
     }
 
-    /** Construct directly from a General Path */
+    /**
+     * Construct directly from a General Path
+     * @param path a GeneralPath
+     * @param srid a SRID
+     */
     public PGShapeGeometry(GeneralPath path, int srid) {
         setType("geometry");
         this.path = path;
         this.srid = srid;
     }
 
-    /** Reads the HexWKB representation */
+    /**
+     * Reads the HexWKB representation
+     * @param value a hex string
+     * @throws SQLException thrown on error
+     */
     public PGShapeGeometry(String value) throws SQLException {
         this();
         setValue(value);
@@ -97,6 +105,8 @@ public class PGShapeGeometry extends PGobject implements Shape {
      * shure to call this only once and if you used the PGShapeGeometry()
      * constructor without parameters. In all other cases, behaviour is
      * undefined.
+     * @param value a hex value
+     * @throws SQLException thrown on error
      */
     public void setValue(String value) throws SQLException {
         srid = parser.parse(value, path);
@@ -117,7 +127,10 @@ public class PGShapeGeometry extends PGobject implements Shape {
         return false;
     }
 
-    /** Return the SRID or Geometry.UNKNOWN_SRID if none was available */
+    /**
+     * Return the SRID or Geometry.UNKNOWN_SRID if none was available
+     * @return a SRID
+     */
     public int getSRID() {
         return srid;
     }

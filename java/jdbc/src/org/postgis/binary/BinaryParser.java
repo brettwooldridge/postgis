@@ -45,7 +45,7 @@ import org.postgis.binary.ByteGetter.StringByteGetter;
  * (bytes), so we cannot even get or build Geometries with more than approx.
  * 2^28 coordinates (8 bytes each).
  * 
- * @author Markus Schaber <markus.schaber@logix-tt.com>
+ * @author Markus Schaber &lt;markus.schaber@logix-tt.com&gt;
  *  
  */
 public class BinaryParser {
@@ -72,6 +72,8 @@ public class BinaryParser {
      * 
      * Is synchronized to protect offset counter. (Unfortunately, Java does not
      * have neither call by reference nor multiple return values.)
+     * @param value a value
+     * @return a parsed Geometry
      */
     public synchronized Geometry parse(String value) {
         StringByteGetter bytes = new ByteGetter.StringByteGetter(value);
@@ -83,6 +85,8 @@ public class BinaryParser {
      * 
      * Is synchronized to protect offset counter. (Unfortunately, Java does not
      * have neither call by reference nor multiple return values.)
+     * @param value a value
+     * @return a parsed Geometry
      */
     public synchronized Geometry parse(byte[] value) {
         BinaryByteGetter bytes = new ByteGetter.BinaryByteGetter(value);

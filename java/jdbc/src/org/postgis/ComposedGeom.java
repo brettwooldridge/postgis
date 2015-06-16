@@ -54,7 +54,7 @@ public abstract class ComposedGeom extends Geometry {
     protected Geometry[] subgeoms = EMPTY;
 
     /**
-     * @param type
+     * @param type a type
      */
     public ComposedGeom(int type) {
         super(type);

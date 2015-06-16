@@ -74,7 +74,7 @@ public class Java2DWrapper extends Driver {
      * @param url the URL of the database to connect to
      * @param info a list of arbitrary tag/value pairs as connection arguments
      * @return a connection to the URL or null if it isnt us
-     * @exception SQLException if a database access error occurs
+     * @throws SQLException if a database access error occurs
      * 
      * @see java.sql.Driver#connect
      * @see org.postgresql.Driver
@@ -88,7 +88,8 @@ public class Java2DWrapper extends Driver {
 
     /**
      * adds the JTS/PostGIS Data types to a PG Connection.
-     * @throws SQLException 
+     * @param pgconn a connection
+     * @throws SQLException thrown on error
      */
     public static void addGISTypes(PGConnection pgconn) throws SQLException {
         pgconn.addDataType("geometry", PGShapeGeometry.class);
@@ -98,6 +99,9 @@ public class Java2DWrapper extends Driver {
 
     /**
      * Mangles the PostGIS URL to return the original PostGreSQL URL
+     * @param url a URL
+     * @return a String
+     * @throws SQLException thrown on error
      */
     public static String mangleURL(String url) throws SQLException {
         if (url.startsWith(POSTGIS_PROTOCOL)) {
@@ -116,7 +120,7 @@ public class Java2DWrapper extends Driver {
      * @see java.sql.Driver#acceptsURL
      * @param url the URL of the driver
      * @return true if this driver accepts the given URL
-     * @exception SQLException if a database-access error occurs (Dont know why
+     * @throws SQLException if a database-access error occurs (Dont know why
      *                it would *shrug*)
      */
     public boolean acceptsURL(String url) throws SQLException {
@@ -148,6 +152,7 @@ public class Java2DWrapper extends Driver {
 
     /**
      * Returns our own CVS version plus postgres Version
+     * @return a version
      */
     public static String getVersion() {
         return "Java2DWrapper " + REVISION + ", wrapping " + Driver.getVersion();

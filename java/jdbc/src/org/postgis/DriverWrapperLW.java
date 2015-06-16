@@ -42,7 +42,7 @@ import java.util.logging.Level;
  * For usage notes, see DriverWrapper class, but use "jdbc:postgresql_lwgis:" as
  * JDBC url prefix and org.postgis.DriverWrapperLW as driver class.
  * 
- * @author Markus Schaber <markus.schaber@logix-tt.com>
+ * @author Markus Schaber &lt;markus.schaber@logix-tt.com&gt;
  * @see DriverWrapper
  */
 public class DriverWrapperLW extends DriverWrapper {
@@ -52,6 +52,7 @@ public class DriverWrapperLW extends DriverWrapper {
 
     /**
      * Default constructor.
+     * @throws SQLException thrown on error
      */
     public DriverWrapperLW() throws SQLException {
         super();
@@ -76,6 +77,7 @@ public class DriverWrapperLW extends DriverWrapper {
 
     /**
      * Returns our own CVS version plus postgres Version
+     * @return the version
      */
     public static String getVersion() {
         return "PostGisWrapperLW " + REVISIONLW + ", wrapping " + Driver.getVersion();

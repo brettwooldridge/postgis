@@ -27,6 +27,7 @@ public abstract class ByteGetter {
     /**
      * Get a byte.
      * 
+     * @param index the index
      * @return The result is returned as Int to eliminate sign problems when
      *         or'ing several values together.
      */

@@ -67,6 +67,10 @@ public class PGgeometry extends PGobject {
 
     /**
      * Maybe we could add more error checking here?
+     * @param value a string value
+     * @param bp a binary parser instance
+     * @return a Geometry
+     * @throws SQLException thrown on error
      */
     public static Geometry geomFromString(String value, BinaryParser bp) throws SQLException {
         return geomFromString(value, bp, false);
@@ -153,7 +157,9 @@ public class PGgeometry extends PGobject {
      * used split() in the org.postgis package, we only needed to split at the
      * first occurence, and thus this code could even be faster.
      * 
-     * @throws SQLException
+     * @param whole a string to split
+     * @return an array of Strings after splitting the whole on ';'
+     * @throws SQLException thrown on error
      */
     public static String[] splitSRID(String whole) throws SQLException {
         int index = whole.indexOf(';', 5); // sridprefix length is 5
