@@ -27,6 +27,7 @@ package examples;
 
 import org.postgis.Geometry;
 import org.postgis.PGgeometry;
+import org.postgis.PGgeometryImpl;
 import org.postgis.binary.BinaryParser;
 import org.postgis.binary.BinaryWriter;
 import org.postgis.binary.ValueSetter;
@@ -224,10 +225,10 @@ public class TestParser {
     /** The actual test method */
     public static void test(String WKT, Connection[] conns, String flags) throws SQLException {
         System.out.println("Original:  " + WKT);
-        Geometry geom = PGgeometry.geomFromString(WKT);
+        Geometry geom = PGgeometryImpl.geomFromString(WKT);
         String parsed = geom.toString();
         System.out.println("Parsed:    " + parsed);
-        Geometry regeom = PGgeometry.geomFromString(parsed);
+        Geometry regeom = PGgeometryImpl.geomFromString(parsed);
         String reparsed = regeom.toString();
         System.out.println("Re-Parsed: " + reparsed);
         if (!geom.equals(regeom)) {
@@ -242,7 +243,7 @@ public class TestParser {
 
         String hexNWKT = bw.writeHexed(regeom, ValueSetter.NDR.NUMBER);
         System.out.println("NDRHex:    " + hexNWKT);
-        regeom = PGgeometry.geomFromString(hexNWKT);
+        regeom = PGgeometryImpl.geomFromString(hexNWKT);
         System.out.println("ReNDRHex:  " + regeom.toString());
         if (!geom.equals(regeom)) {
             System.out.println("--- Geometries are not equal!");
@@ -253,7 +254,7 @@ public class TestParser {
 
         String hexXWKT = bw.writeHexed(regeom, ValueSetter.XDR.NUMBER);
         System.out.println("XDRHex:    " + hexXWKT);
-        regeom = PGgeometry.geomFromString(hexXWKT);
+        regeom = PGgeometryImpl.geomFromString(hexXWKT);
         System.out.println("ReXDRHex:  " + regeom.toString());
         if (!geom.equals(regeom)) {
             System.out.println("--- Geometries are not equal!");
@@ -481,7 +482,7 @@ public class TestParser {
         ResultSet rs = stat.executeQuery("SELECT asEWKT(geometry_in('" + rep + "'))");
         rs.next();
         String resrep = rs.getString(1);
-        return PGgeometry.geomFromString(resrep);
+        return PGgeometryImpl.geomFromString(resrep);
     }
 
     /** Pass a geometry representation through the SQL server via EWKB */

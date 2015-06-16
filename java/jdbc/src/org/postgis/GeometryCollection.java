@@ -62,7 +62,7 @@ public class GeometryCollection extends ComposedGeom {
     }
 
     protected Geometry createSubGeomInstance(String token, boolean haveM) throws SQLException {
-        return PGgeometry.geomFromString(token, haveM);
+        return PGgeometryImpl.geomFromString(token, haveM);
     }
 
     protected void innerWKT(StringBuffer SB) {

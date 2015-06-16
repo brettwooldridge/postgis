@@ -26,21 +26,28 @@
 
 package org.postgis;
 
-import org.postgresql.util.PGobject;
-import org.postgresql.util.PGtokenizer;
-
 import java.sql.SQLException;
+
+import org.postgresql.util.PGtokenizer;
 
 /*
  * Updates Oct 2002 - data members made private - getLLB() and getURT() methods
  * added
  */
 
-public abstract class PGboxbase extends PGobject {
+public abstract class PGboxbaseImpl implements IPGobject {
     /* JDK 1.5 Serialization */
     private static final long serialVersionUID = 0x100;
 
-    PGboxbaseImpl boxBaseImpl;
+    /**
+     * The lower left bottom corner of the box.
+     */
+    protected Point llb;
+
+    /**
+     * The upper right top corner of the box.
+     */
+    protected Point urt;
 
     /**
      * The Prefix we have in WKT rep.
@@ -57,17 +64,17 @@ public abstract class PGboxbase extends PGobject {
      */
     public abstract String getPGtype();
 
-    public PGboxbase() {
+    public PGboxbaseImpl() {
         this.setType(getPGtype());
     }
 
-    public PGboxbase(Point llb, Point urt) {
+    public PGboxbaseImpl(Point llb, Point urt) {
         this();
         this.llb = llb;
         this.urt = urt;
     }
 
-    public PGboxbase(String value) throws SQLException {
+    public PGboxbaseImpl(String value) throws SQLException {
         this();
         setValue(value);
     }
@@ -133,8 +140,8 @@ public abstract class PGboxbase extends PGobject {
     }
 
     public boolean equals(Object other) {
-        if (other instanceof PGboxbase) {
-            PGboxbase otherbox = (PGboxbase) other;
+        if (other instanceof PGboxbaseImpl) {
+            PGboxbaseImpl otherbox = (PGboxbaseImpl) other;
             return (compareLazyDim(this.llb, otherbox.llb) && compareLazyDim(this.urt, otherbox.urt));
         }
         return false;
@@ -153,13 +160,13 @@ public abstract class PGboxbase extends PGobject {
                 && (((first.dimension == 2 || first.z == 0.0) && (second.dimension == 2 || second.z == 0)) || (first.z == second.z));
     }
 
-    public Object clone() {
-        PGboxbase obj = newInstance();
-        obj.llb = this.llb;
-        obj.urt = this.urt;
-        obj.setType(type);
-        return obj;
-    }
+//    public Object clone() {
+//        PGboxbaseImpl obj = newInstance();
+//        obj.llb = this.llb;
+//        obj.urt = this.urt;
+//        obj.setType(type);
+//        return obj;
+//    }
 
     /**
      * We could have used this.getClass().newInstance() here, but this forces us
@@ -168,5 +175,5 @@ public abstract class PGboxbase extends PGobject {
      * CloneNotSupportedException, we cannot even pass this exceptions down to
      * callers in a sane way.
      */
-    protected abstract PGboxbase newInstance();
+//    protected abstract PGboxbaseImpl newInstance();
 }

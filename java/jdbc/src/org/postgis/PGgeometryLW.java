@@ -23,8 +23,6 @@
 
 package org.postgis;
 
-import org.postgis.binary.BinaryWriter;
-
 import java.sql.SQLException;
 
 /**
@@ -37,29 +35,27 @@ public class PGgeometryLW extends PGgeometry {
     /* JDK 1.5 Serialization */
     private static final long serialVersionUID = 0x100;
     
-    BinaryWriter bw = new BinaryWriter();
-
     public PGgeometryLW() {
         super();
     }
 
     public PGgeometryLW(Geometry geom) {
-        super(geom);
+        this();
+        geoImpl = new PGgeometryLWImpl(geom);
     }
 
     public PGgeometryLW(String value) throws SQLException {
-        super(value);
+        this();
+        setValue(value);
     }
 
-    public String toString() {
-        return geom.toString();
+    @Override
+    public void setValue(String value) throws SQLException {
+    	geoImpl = new PGgeometryLWImpl(value);
     }
 
-    public String getValue() {
-        return bw.writeHexed(geom);
-    }
-
+    @Override
     public Object clone() {
-        return new PGgeometryLW(geom);
+        return new PGgeometryLW(getGeometry());
     }
 }

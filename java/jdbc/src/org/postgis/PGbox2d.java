@@ -46,7 +46,7 @@ public class PGbox2d extends PGboxbase {
     public void setValue(String value) throws SQLException {
         super.setValue(value);
 
-        if (llb.dimension != 2 || urt.dimension != 2) {
+        if (getLLB().dimension != 2 || getURT().dimension != 2) {
             throw new SQLException("PGbox2d is only allowed to have 2 dimensions!");
         }
     }
